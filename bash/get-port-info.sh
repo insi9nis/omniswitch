@@ -1,7 +1,7 @@
 #!/bin/bash
 # Creates a CSV file of various port information that would take several commands to gather per port otherwise
-# Port = Port number in chassis/slot/port format
-# Link = Link state: up or down
+# Port = Port number in x/y/z format
+# Link = up/down
 # Type = 8p8c (RJ45), dac, fiber, or empty SFP
 # LagKey = admin-key if port is in a linkagg
 # LagNum = agg number if port is in a linkagg
@@ -15,8 +15,8 @@ for x in `show interfaces status | grep -E '/[0-9]{1,2}' | awk '{print $1}'`; do
   echo -n ${x}
   int=$(show interfaces ${x})
   if [[ $(echo "${int}" | grep 'Interface Type' | grep -c 'Fiber') > 0 ]]; then
-    if [[ $(echo "${int}" | grep SFP | grep -vcE '(N/A|NotPresent|Stacking)') > 0 ]]; then 
-      if [[ $(echo "${int}" | grep SFP | grep -vc 'COPPER') > 0 ]]; then 
+    if [[ $(echo "${int}" | grep SFP | grep -vcE '(N/A|NotPresent)') > 0 ]]; then 
+      if [[ $(echo "${int}" | grep SFP | grep -vcE '(COPPER|_CR4)') > 0 ]]; then 
         echo -n ',up,fiber'
       else
         echo -n ',up,dac'
@@ -64,3 +64,4 @@ for x in `show interfaces status | grep -E '/[0-9]{1,2}' | awk '{print $1}'`; do
   echo ",\"${vlans}\""
 done
 echo ''
+
