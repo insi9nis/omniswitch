@@ -26,4 +26,6 @@ From a CLI prompt, mark the file executable
 
 ## To execute the file, from a CLI prompt
 
+Make sure you're in the directory where you uploaded or created the file, then:
+
 > ./__get-port-info.sh__
