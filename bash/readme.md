@@ -33,3 +33,5 @@ Make sure you're in the directory where you uploaded or created the file, then:
 If you want to redirect the output to a file, so you can push it elsewhere or pick it up via SFTP:
 
 > ./__get-port-info.sh__ > __port-info.csv__
+
+You may need to be patient while it runs.  You won't see any output until it's done and drops you back at a prompt.
