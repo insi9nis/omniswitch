@@ -29,3 +29,7 @@ From a CLI prompt, mark the file executable
 Make sure you're in the directory where you uploaded or created the file, then:
 
 > ./__get-port-info.sh__
+
+If you want to redirect the output to a file, so you can push it elsewhere or pick it up via SFTP:
+
+> ./__get-port-info.sh__ > __port-info.csv__
