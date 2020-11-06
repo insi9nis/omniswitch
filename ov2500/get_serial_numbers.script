@@ -1,0 +1,5 @@
+echo '' > /flash/sn.txt
+SNAME=$(show config snapshot | grep "system name" | awk '{gsub("\"", "",$3); print $3}')
+show chassis | egrep 'Model Name|Serial Number' | awk -F: '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//' | awk '{getline b;printf("%s %s\n",$0,b)}' | while read x; do echo ${SNAME}, ${x} >> /flash/sn.txt; done
+cat /flash/sn.txt
+tftp -p -l /flash/sn.txt -r ${SNAME}_serials.csv $ip
